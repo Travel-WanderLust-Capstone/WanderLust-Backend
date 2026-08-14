@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS trips_users;
+DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS selections;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS trips;
@@ -36,6 +37,11 @@ name text NOT NULL,
 type text NOT NULL,
 description text NOT NULL,
 destination text NOT NULL
+);
+
+CREATE TABLE location (
+id serial PRIMARY KEY,
+selections_id integer UNIQUE NOT NULL REFERENCES selections(id) ON DELETE CASCADE
 );
 
 CREATE TABLE trips_users (
