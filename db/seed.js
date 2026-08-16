@@ -8,6 +8,15 @@ await db.end();
 console.log("🌱 Database seeded.");
 
 async function seed() {
+  //see Block6.04 Schemas/Seeding
+  //ran seed. Recieved an error that there were duplicate emails.
+  //emails has a unique constraint.
+  //Truncate clears old data before you write new data
+  await db.query(`
+    TRUNCATE TABLE trips_users, selections, tasks, place, trips, location, users 
+    RESTART IDENTITY CASCADE;
+  `);
+
   //await createUser("foo", "bar");
   const hashedPassword1 = await bcrypt.hash("hellodarknessmyoldfriend", 10);
   const hashedPassword2 = await bcrypt.hash("ivecometotalktoyouagain", 10);
@@ -240,6 +249,7 @@ async function seed() {
   RETURNING *;`,
     ["activity3", "activity", "its an activity", 3],
   );
+
   //lodging
   await db.query(
     `
@@ -308,21 +318,21 @@ async function seed() {
   //selections
   const selection1 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
+  INSERT INTO selections (trip_id, place_id)
   VALUES ($1, $2)
   RETURNING *;`,
     [1, 2],
   );
   const selection2 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
+  INSERT INTO selections (trip_id, place_id)
   VALUES ($1, $2)
   RETURNING *;`,
     [1, 3],
   );
   const selection3 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
+  INSERT INTO selections (trip_id, place_id)
   VALUES ($1, $2)
   RETURNING *;`,
     [2, 2],

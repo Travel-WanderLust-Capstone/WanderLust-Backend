@@ -1,9 +1,13 @@
+-- children
+-- no FK on trips_users and selections, they go first
 DROP TABLE IF EXISTS trips_users;
-DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS selections;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS place;
 DROP TABLE IF EXISTS trips;
+
+-- Parents
+DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -49,12 +53,7 @@ CREATE TABLE place (
 CREATE TABLE selections (
 id serial PRIMARY KEY,
 trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
-places_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
-);
-
-CREATE TABLE location (
-id serial PRIMARY KEY,
-selections_id integer UNIQUE NOT NULL REFERENCES selections(id) ON DELETE CASCADE
+place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
 );
 
 CREATE TABLE trips_users (
