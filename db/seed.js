@@ -36,49 +36,15 @@ async function seed() {
   RETURNING *;`,
     ["Lucian Lee", "l.lee@email.com", hashedPassword3],
   );
-
-  //locations
-  const location1 = await db.query(
-    `
-  INSERT INTO location (name, description)
-  VALUES ($1, $2)
-  RETURNING *;`,
-    [
-      "Rome, Italy",
-      "Rome is the capital city of Italy. Known as the Eternal City, it blends nearly 3,000 years of history with busy modern life. It sits on the Tiber River in the central part of the country and surrounds Vatican City.",
-    ],
-  );
-
-  const location2 = await db.query(
-    `
-    INSERT INTO location (name, description)
-    VALUES ($1, $2)
-    RETURNING *;`,
-    [
-      "New York, NY",
-      "New York City is the most populous city in the United States. Located in southeastern New York State, it sits at the mouth of the Hudson River on a major natural harbor. The city includes five boroughs: Manhattan, Brooklyn, Queens, the Bronx, and Staten Island. It serves as a global hub for finance, culture, and media.",
-    ],
-  );
-  const location3 = await db.query(
-    `
-    INSERT INTO location (name, description)
-    VALUES ($1, $2)
-    RETURNING *;`,
-    [
-      "Las Vegas, NV",
-      "Las Vegas is a major resort city in the Mojave Desert of Nevada. Known as the Entertainment Capital of the World, it is famous for its vibrant nightlife, luxury casino-hotels, fine dining, and 24-hour excitement",
-    ],
-  );
-
   //trips
   const trip1 = await db.query(
     `
-  INSERT INTO trips (name, location_id, start_date, end_date, description)
+  INSERT INTO trips (name, destination, start_date, end_date, description)
   VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
     [
       "Vacation",
-      1,
+      "Rome, Italy",
       "2026-08-13",
       "2026-08-21",
       "Family trip to Rome!! gonna go sight-seeing, and find some local cuisine!",
@@ -87,12 +53,12 @@ async function seed() {
 
   const trip2 = await db.query(
     `
-  INSERT INTO trips (name, location_id, start_date, end_date, description)
+  INSERT INTO trips (name, destination, start_date, end_date, description)
   VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
     [
       "Business Trip",
-      2,
+      "New York, New York",
       "2026-10-03",
       "2026-10-10",
       "Business trip to New York. we have some extra time for activities outside of meetings",
@@ -101,12 +67,12 @@ async function seed() {
 
   const trip3 = await db.query(
     `
-  INSERT INTO trips (name, location_id, start_date, end_date, description)
+  INSERT INTO trips (name, destination, start_date, end_date, description)
   VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
     [
       "Bachelorette Trip!!",
-      3,
+      "Las Vegas, Nevada",
       "2027-02-15",
       "2027-02-23",
       "Hey girls!! We're going to Vegas for my bachelorette party!! Make sure you bring a swimsuit and plenty of money for the slots!",
@@ -176,156 +142,45 @@ async function seed() {
     ["Reserve table", "2027-02-10", false, 3, 1],
   );
 
-  //activities
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity1", "activity", "its an activity", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity2", "activity", "its an activity", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity3", "activity", "its an activity", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity1", "activity", "its an activity", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity2", "activity", "its an activity", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity3", "activity", "its an activity", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity1", "activity", "its an activity", 3],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity2", "activity", "its an activity", 3],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["activity3", "activity", "its an activity", 3],
-  );
-  //lodging
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 1],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 2],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 3],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 3],
-  );
-  await db.query(
-    `
-  INSERT INTO place (name, type, description, location_id)
-  VALUES ($1, $2, $3, $4)
-  RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 3],
-  );
-
   //selections
   const selection1 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
-  VALUES ($1, $2)
+  INSERT INTO selections (trip_id, name, type, description, destination)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
-    [1, 2],
+    [
+      1,
+      "the Sleep Inn",
+      "Lodging",
+      "hotel stay from 08/13 to 8/21",
+      "Rome, Italy",
+    ],
   );
   const selection2 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
-  VALUES ($1, $2)
+  INSERT INTO selections (trip_id, name, type, description, destination)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
-    [1, 3],
+    [
+      1,
+      "Sight seeing",
+      "Activity",
+      "We are scheduled to go out on the 3rd day to see the colosseum",
+      "Rome, Italy",
+    ],
   );
   const selection3 = await db.query(
     `
-  INSERT INTO selections (trip_id, places_id)
-  VALUES ($1, $2)
+  INSERT INTO selections (trip_id, name, type, description, destination)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING *;`,
-    [2, 2],
+    [
+      2,
+      "Team Dinner",
+      "Activity",
+      "We are booked to celebrate hard work completed on the last day of the trip. Reservation is at 5pm",
+      "New York, NY",
+    ],
   );
 
   //trips_users
