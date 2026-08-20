@@ -17,6 +17,7 @@ async function seed() {
     RESTART IDENTITY CASCADE;
   `);
 
+
   //await createUser("foo", "bar");
   const hashedPassword1 = await bcrypt.hash("hellodarknessmyoldfriend", 10);
   const hashedPassword2 = await bcrypt.hash("ivecometotalktoyouagain", 10);
@@ -380,5 +381,26 @@ async function seed() {
   VALUES ($1, $2, $3)
   RETURNING *;`,
     [3, 2, "Bachelorette Trip"],
+  );
+
+
+  //messages (trip chat)
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body)
+     VALUES ($1, $2, $3)
+     RETURNING *;`,
+    [1, 1, "Booked the hotel! ⭐⭐⭐"],
+  );
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body)
+     VALUES ($1, $2, $3)
+     RETURNING *;`,
+    [1, 2, "what time is our flight?"],
+  );
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body)
+     VALUES ($1, $2, $3)
+     RETURNING *;`,
+    [1, 1, "lands at 3pm — I'll add it to tasks"],
   );
 }
