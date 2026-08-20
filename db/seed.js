@@ -384,23 +384,22 @@ async function seed() {
   );
 
 
+      //give the demo chatters my team's names
+  await db.query(`UPDATE users SET name = 'Casey'  WHERE id = 1;`);
+  await db.query(`UPDATE users SET name = 'Peyton' WHERE id = 2;`);
+  await db.query(`UPDATE users SET name = 'Asher'  WHERE id = 3;`);
+
   //messages (trip chat)
   await db.query(
-    `INSERT INTO messages (trip_id, user_id, body)
-     VALUES ($1, $2, $3)
-     RETURNING *;`,
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
     [1, 1, "Booked the hotel! ⭐⭐⭐"],
   );
   await db.query(
-    `INSERT INTO messages (trip_id, user_id, body)
-     VALUES ($1, $2, $3)
-     RETURNING *;`,
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
     [1, 2, "what time is our flight?"],
   );
   await db.query(
-    `INSERT INTO messages (trip_id, user_id, body)
-     VALUES ($1, $2, $3)
-     RETURNING *;`,
-    [1, 1, "lands at 3pm — I'll add it to tasks"],
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
+    [1, 3, "landing at 3pm, i'll add it to tasks"],
   );
 }
