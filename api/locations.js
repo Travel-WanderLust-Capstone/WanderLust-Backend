@@ -24,7 +24,7 @@ router.get("/:id", async (request, response) => {
   } //if no location, send 404 NOT FOUND
 
   //then retrieve users trips that are in that location
-  const trips = await getTripByUserId(Number(id));
+  const trips = await getUsersByTripId(Number(id));
   location.trips = trips;
 
   return response.send(location);
