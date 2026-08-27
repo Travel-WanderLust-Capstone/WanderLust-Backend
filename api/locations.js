@@ -1,14 +1,14 @@
 import express from "express";
 const router = express.Router();
 
-import { getLocations, getLocationById } from "#db/queries/locations";
+import { getLocation, getLocationById } from "#db/queries/location";
 import { getTripByIdForUser } from "#db/queries/trip_details";
 
 //TEST in POSTMAN
 
 //GET /location sends array of new trip locations
 router.get("/", async (request, response) => {
-  const location = await getLocations();
+  const location = await getLocation();
 
   return response.send(location);
 });

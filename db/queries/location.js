@@ -15,7 +15,7 @@ RETURNING *
 
 // //Get all locations
 //get every column" and FROM location means "from the table named location".
-export async function getLocations() {
+export async function getLocation() {
   const sql = `
 SELECT * 
 FROM location

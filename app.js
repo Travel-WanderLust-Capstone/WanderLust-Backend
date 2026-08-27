@@ -26,7 +26,7 @@ app.get("/", (req, res) => res.send("Hello, World!"));
 //need to use routes and connect to router (characterRouter).
 //export default so you can name whatever you want
 app.use("/users", usersRouter);
-app.use("/locations", locationRouter);
+app.use("/location", locationRouter);
 app.use("/trips", tripRouter);
 app.use("/trips", taskRouter); //:id/tasks follows "/trips"
 app.use("/tasks", taskRouter);
