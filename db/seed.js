@@ -40,36 +40,38 @@ async function seed() {
   //locations
   const location1 = await db.query(
     `
-  INSERT INTO location (name, description)
-  VALUES ($1, $2)
+  INSERT INTO location (name, description, image_url)
+  VALUES ($1, $2, $3)
   RETURNING *;`,
     [
       "Rome, Italy",
       "Rome is the capital city of Italy. Known as the Eternal City, it blends nearly 3,000 years of history with busy modern life. It sits on the Tiber River in the central part of the country and surrounds Vatican City.",
+      "https://images.pexels.com/photos/33562162/pexels-photo-33562162.jpeg",
     ],
   );
 
   const location2 = await db.query(
     `
-    INSERT INTO location (name, description)
-    VALUES ($1, $2)
+    INSERT INTO location (name, description, image_url)
+    VALUES ($1, $2, $3)
     RETURNING *;`,
     [
       "New York, NY",
       "New York City is the most populous city in the United States. Located in southeastern New York State, it sits at the mouth of the Hudson River on a major natural harbor. The city includes five boroughs: Manhattan, Brooklyn, Queens, the Bronx, and Staten Island. It serves as a global hub for finance, culture, and media.",
+      "https://images.pexels.com/photos/28279107/pexels-photo-28279107.jpeg",
     ],
   );
   const location3 = await db.query(
     `
-    INSERT INTO location (name, description)
-    VALUES ($1, $2)
+    INSERT INTO location (name, description, image_url)
+    VALUES ($1, $2, $3)
     RETURNING *;`,
     [
       "Las Vegas, NV",
       "Las Vegas is a major resort city in the Mojave Desert of Nevada. Known as the Entertainment Capital of the World, it is famous for its vibrant nightlife, luxury casino-hotels, fine dining, and 24-hour excitement",
+      "https://images.pexels.com/photos/18041018/pexels-photo-18041018.jpeg",
     ],
   );
-
   //trips
   const trip1 = await db.query(
     `
@@ -182,63 +184,103 @@ async function seed() {
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity1", "activity", "its an activity", 1],
+    [
+      "Sight-Seeing",
+      "activity",
+      "explore all Rome has to offer, enjoy the beautiful architecture.",
+      1,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity2", "activity", "its an activity", 1],
+    [
+      "Fine Dining Restaurant",
+      "activity",
+      "Enjoy meals prepared by our professional chefs. 5-star service",
+      1,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity3", "activity", "its an activity", 1],
+    ["Wine-Tasting", "activity", "Try our delicious wines!", 1],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity1", "activity", "its an activity", 2],
+    [
+      "Tony's Hot Dog Stand",
+      "activity",
+      "Best 'dogs this side of the Hudson River!",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity2", "activity", "its an activity", 2],
+    [
+      "Central Park to Lady Liberty Tour",
+      "activity",
+      "You're Walkin' Here! Enjoy the sights!",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity3", "activity", "its an activity", 2],
+    [
+      "Central Perk",
+      "activity",
+      "Find your own group of F·R·I·E·N·D·S at this state-of-the-art coffee shop!",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity1", "activity", "its an activity", 3],
+    [
+      "Spa Day of The Desert",
+      "activity",
+      "Time to relax! Enjoy our adult refreshments as we massage the daylight outta you.",
+      3,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity2", "activity", "its an activity", 3],
+    [
+      "Casino!",
+      "activity",
+      "Come have fun! Don't mind the bright lights, we got you covered! Who needs sunglasses with THIS good of a time, right?",
+      3,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["activity3", "activity", "its an activity", 3],
+    [
+      "Mob Museum",
+      "activity",
+      "This visit to the ol' courthouse won't affect your record",
+      3,
+    ],
   );
   //lodging
   await db.query(
@@ -246,63 +288,108 @@ async function seed() {
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 1],
+    [
+      "Hotel Albergo Abruzzi",
+      "lodging",
+      "The family run Hotel Albergo Abruzzi Rome is a 3-star hotel accommodation. Our address is Piazza della Rotonda n.69- 00186 Rome, Italy",
+      1,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 1],
+    [
+      "Sophie Terrace Hotel",
+      "lodging",
+      "The Sophie Terrace Hotel is a newly built 3-star structure. Located at Via Principe Amedeo 6 - 00185 Roma",
+      1,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 1],
+    [
+      "Daplace Locanda Piazza del Popolo",
+      "lodging",
+      "Located close to Piazza del Popolo and the Flaminio Metro Station, Locanda Piazza del Popolo offers modern rooms. Explore Rome's historic center with ease.",
+      1,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 2],
+    [
+      "Hyatt Grand Central",
+      "lodging",
+      "Hyatt Grand Central New York is connected to Grand Central Station, which is convenient for travel. Located on 42nd Street of Midtown Manhattan",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 2],
+    [
+      "The Manhattan at Times Square Hotel",
+      "lodging",
+      "Located at 790 7th Avenue, this location is a 5-10 minute walk from Times Square, Broadway theaters, and Central Park.",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 2],
+    [
+      "OYO Times Square",
+      "lodging",
+      "Modern rooms in the city that never sleeps",
+      2,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging1", "lodging", "its a place to sleep", 3],
+    [
+      "Caesars Palace",
+      "lodging",
+      "Luxury hotel located on the Las Vegas Strip. Known for it's casino, entertainment, and dining options",
+      3,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging2", "lodging", "its a place to sleep", 3],
+    [
+      "MGM Grand",
+      "lodging",
+      "The MGM Grand Garden Arena is connected to the hotel, where you can find entertainment",
+      3,
+    ],
   );
   await db.query(
     `
   INSERT INTO place (name, type, description, location_id)
   VALUES ($1, $2, $3, $4)
   RETURNING *;`,
-    ["lodging3", "lodging", "its a place to sleep", 3],
+    [
+      "Mandalay Bay",
+      "lodging",
+      "Located at 3950 S Las Vegas Blvd, this hotel has a real sand and wave pool, along with the Shark Reef Aquarium",
+      3,
+    ],
   );
 
   //selections

@@ -1,7 +1,7 @@
 import db from "#db/client";
 
 export async function getLocations() {
-  const sql = `SELECT name FROM location;`;
+  const sql = `SELECT name, id FROM location;`;
   const { rows } = await db.query(sql);
   return rows;
 }

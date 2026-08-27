@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS trips_users;
-DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS selections;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS place;
 DROP TABLE IF EXISTS trips;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS location;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -16,7 +16,8 @@ CREATE TABLE users (
 CREATE TABLE location (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  description TEXT NOT NULL
+  description TEXT NOT NULL,
+  image_url TEXT NOT NULL
 );
 
 CREATE TABLE trips (

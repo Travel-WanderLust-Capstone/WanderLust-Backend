@@ -9,38 +9,38 @@ import { getLocationById, getLocations } from "#db/queries/locations";
 
 const router = express.Router();
 export default router;
-router.get("/location/:id/activities/:id", async (req, res) => {
-  const place = await getPlaceDetails(req.params.id);
+router.get("/:id/activities/:id", async (req, res) => {
+  const place = await getPlaceDetails(req.params.placeid);
   if (place.length === 0) return res.status(404).send("place not found");
   return res.send(place);
 });
 
-router.get("/location/:id/activities", async (req, res) => {
+router.get("/:id/activities", async (req, res) => {
   const activity = await getActivitiesByLocation(req.params.id);
   if (activity.length === 0)
     return res.status(404).send("activities not found");
   return res.send(activity);
 });
 
-router.get("/location/:id/lodging/:id", async (req, res) => {
-  const place = await getPlaceDetails(req.params.id);
+router.get("/:id/lodging/:id", async (req, res) => {
+  const place = await getPlaceDetails(req.params.placeid);
   if (place.length === 0) return res.status(404).send("place not found");
   return res.send(place);
 });
 
-router.get("/location/:id/lodging", async (req, res) => {
+router.get("/:id/lodging", async (req, res) => {
   const lodging = await getLodgingByLocation(req.params.id);
   if (lodging.length === 0) return res.status(404).send("lodging not found");
   return res.send(lodging);
 });
 
-router.get("/location/:id/:placeid", async (req, res) => {
-  const place = await getPlaceDetails(req.params.id);
+router.get("/:id/:placeid", async (req, res) => {
+  const place = await getPlaceDetails(req.params.placeid);
   if (place.length === 0) return res.status(404).send("place not found");
   return res.send(place);
 });
 
-router.get("/location/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const location = await getLocationById(req.params.id);
   if (location.length === 0) return res.status(404).send("location Not Found");
   const places = await getPlacesByLocation(req.params.id);
@@ -48,7 +48,7 @@ router.get("/location/:id", async (req, res) => {
   return res.send({ location, places });
 });
 
-router.get("/location", async (req, res) => {
+router.get("/", async (req, res) => {
   const explore = await getLocations();
   if (explore.length === 0) return res.status(404).send("Locations not Found");
   return res.send(explore);
