@@ -29,7 +29,7 @@ export async function getLocationById(id) {
   const sql = `
     SELECT *
     FROM location
-    WHERE iid = $1;
+    WHERE id = $1;
     `;
   const { rows } = await db.query(sql, [id]);
   return rows[0];
