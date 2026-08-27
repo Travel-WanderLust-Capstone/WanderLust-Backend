@@ -33,8 +33,8 @@ router.get("/", async (request, response) => {
 //URL contains a variable called id
 router.get("/:id", async (request, response) => {
   //async =function can wait for asynchronous operations
-  //request contains information about what the frontend/client sent to your backend.
-  //response is what you use to send something back to the frontend/client.
+  //request: contains information about what the frontend/client sent to your backend.
+  //response: is what you use to send something back to the frontend/client.
 
   try {
     //checks if trip exists. searches database for that trip

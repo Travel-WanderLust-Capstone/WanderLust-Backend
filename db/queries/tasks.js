@@ -59,6 +59,32 @@ ORDER BY tasks.due_date;
   return rows;
 }
 
+//DELETE TASK
+//function to delete task
+//async: function may take time
+export async function deleteTask(taskId) {
+  //taskId=iD of task want to delete
+
+  //Delete from tasks table
+  //Whereid: tells postgreSQL which task to be deleted. $1 is placeholder.
+  //Return task that has been deleted
+  //PostgreSQL deletes row and sends it back to Jacascript code
+  const sql = `
+    DELETE FROM tasks 
+    WHERE id = $1
+    RETURNING *;
+    `;
+  //db.query= send SQL command to PostgreSQL
+  //await=wait for postgresSQL to delete task then continue
+  const { rows } = await db.query(sql, [taskId]);
+  //{rows} returns object with information about query
+
+  return rows[0]; //give first task in array
+}
+
+//UPDATES task = PATCH
+//two pieces: task and user
+//change an existing row in tasks table
 export async function assignTaskToUser(taskId, userId) {
   const sql = `
     UPDATE tasks
@@ -66,9 +92,18 @@ export async function assignTaskToUser(taskId, userId) {
     WHERE id = $2
     RETURNING *; 
     `;
+  //changing assigned_to column: $1 is placeholder
+  //first value = userId
+  //where Id = $2: only update task whose ID matched $2
+
+  //ex: assigned_to = $1: userId #
+  //WHERE id = $2: task id
+
+  //RETURNING *: send updated task back to javascript
 
   const {
     rows: [task],
+    //Go into rows, grab the first item, and store it in a variable called task
   } = await db.query(sql, [userId, taskId]);
 
   return task;
