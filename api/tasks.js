@@ -8,6 +8,7 @@ import {
   createTask,
   deleteTask,
 } from "#db/queries/tasks";
+import requireUser from "#middleware/requireUser";
 
 //router receives information from the frontend
 //pulls what it needs from request.params and/or request.body
@@ -16,7 +17,8 @@ import {
 //GET REQUEST api/trips/:id/tasks
 //Get all tasks belonging to a specific trip.
 //I want to retrieve/read information
-router.get("/:id/tasks", async (request, response) => {
+//must be logged in
+router.get("/:id/tasks", requireUser, async (request, response) => {
   //async: take time
   //request: information coming into your server.
   //repsponse: what you use to send information back to the frontend
@@ -75,7 +77,7 @@ router.delete("/tasks/:taskId", async (request, response) => {
 
 //POST CREATE TASK
 //CREATE
-router.post("/:id/tasks", async (request, response) => {
+router.post("/:id/tasks", requireUser, async (request, response) => {
   try {
     const tripId = request.params.id;
 

@@ -31,7 +31,7 @@ router.get("/", async (request, response) => {
 //get single trip by id
 //When someone sends a GET request to this URL, run this function
 //URL contains a variable called id
-router.get("/:id", async (request, response) => {
+router.get("/:id", requireUser, async (request, response) => {
   //async =function can wait for asynchronous operations
   //request: contains information about what the frontend/client sent to your backend.
   //response: is what you use to send something back to the frontend/client.
@@ -131,7 +131,7 @@ router.delete("/:id", async (request, response) => {
 //request holds the incoming data sent by the client
 //response is used to send a answer back
 //requireUser needs logged in user
-router.post("/", async (request, response) => {
+router.post("/", requireUser, async (request, response) => {
   //checks if request.body is missing or empty
   try {
     if (!request.body)
