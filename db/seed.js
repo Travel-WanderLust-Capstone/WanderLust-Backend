@@ -8,6 +8,16 @@ await db.end();
 console.log("🌱 Database seeded.");
 
 async function seed() {
+  //see Block6.04 Schemas/Seeding
+  //ran seed. Recieved an error that there were duplicate emails.
+  //emails has a unique constraint.
+  //Truncate clears old data before you write new data
+  await db.query(`
+    TRUNCATE TABLE trips_users, selections, tasks, place, trips, location, users 
+    RESTART IDENTITY CASCADE;
+  `);
+
+
   //await createUser("foo", "bar");
   const hashedPassword1 = await bcrypt.hash("hellodarknessmyoldfriend", 10);
   const hashedPassword2 = await bcrypt.hash("ivecometotalktoyouagain", 10);
@@ -457,5 +467,25 @@ async function seed() {
   VALUES ($1, $2, $3)
   RETURNING *;`,
     [3, 2, "Bachelorette Trip"],
+  );
+
+
+      //give the demo chatters my team's names
+  await db.query(`UPDATE users SET name = 'Casey'  WHERE id = 1;`);
+  await db.query(`UPDATE users SET name = 'Peyton' WHERE id = 2;`);
+  await db.query(`UPDATE users SET name = 'Asher'  WHERE id = 3;`);
+
+  //messages (trip chat)
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
+    [1, 1, "Booked the hotel! ⭐⭐⭐"],
+  );
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
+    [1, 2, "what time is our flight?"],
+  );
+  await db.query(
+    `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
+    [1, 3, "landing at 3pm, i'll add it to tasks"],
   );
 }

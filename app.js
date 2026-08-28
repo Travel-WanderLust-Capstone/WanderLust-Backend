@@ -3,6 +3,7 @@ const app = express();
 export default app;
 
 import usersRouter from "#api/users";
+import chatRouter from "#api/chat";
 import placesRouter from "#api/places_locations";
 import getUserFromToken from "#middleware/getUserFromToken";
 import handlePostgresErrors from "#middleware/handlePostgresErrors";
@@ -22,6 +23,7 @@ app.get("/", (req, res) => res.send("Hello, World!"));
 
 app.use("/users", usersRouter);
 
+app.use("/trips", chatRouter);
 app.use("/explore", placesRouter);
 
 app.use(handlePostgresErrors);

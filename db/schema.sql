@@ -1,9 +1,15 @@
+-- children
+-- no FK on trips_users and selections, they go first
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS trips_users;
 DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS selections;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS place;
 DROP TABLE IF EXISTS trips;
+
+-- Parents
+DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS location;
 
@@ -51,7 +57,7 @@ CREATE TABLE place (
 CREATE TABLE selections (
 id serial PRIMARY KEY,
 trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
-places_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
+place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
 );
 
 CREATE TABLE location (
@@ -65,4 +71,13 @@ trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
 user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
 message text NOT NULL,
 UNIQUE (trip_id, user_id)
+);
+
+
+CREATE TABLE messages (
+  id serial PRIMARY KEY,
+  trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+  user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  body text NOT NULL,
+  created_at timestamp DEFAULT now()
 );
