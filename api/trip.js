@@ -16,7 +16,7 @@ import requireUser from "#middleware/requireUser"; //****HOLD on this
 
 //GET array of trips
 //CREATE NEW TRIP PAGE
-router.get("/", async (request, response) => {
+router.get("/", requireUser, async (request, response) => {
   try {
     const trips = await getTrips();
     return response.send(trips);
