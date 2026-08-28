@@ -6,6 +6,8 @@ import usersRouter from "#api/users";
 import locationRouter from "#api/locations";
 import tripRouter from "#api/trip";
 import taskRouter from "#api/tasks";
+import chatRouter from "#api/chat";
+import placesRouter from "#api/places_locations";
 import getUserFromToken from "#middleware/getUserFromToken";
 import handlePostgresErrors from "#middleware/handlePostgresErrors";
 import cors from "cors";
@@ -30,6 +32,9 @@ app.use("/location", locationRouter);
 app.use("/trips", tripRouter);
 app.use("/trips", taskRouter); //:id/tasks follows "/trips"
 app.use("/tasks", taskRouter);
+
+app.use("/trips", chatRouter);
+app.use("/explore", placesRouter);
 
 app.use(handlePostgresErrors);
 app.use((err, req, res, next) => {
