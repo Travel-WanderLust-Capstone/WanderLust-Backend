@@ -2,7 +2,6 @@
 -- no FK on trips_users and selections, they go first
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS trips_users;
-DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS selections;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS place;
@@ -60,9 +59,10 @@ trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
 place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
 );
 
-CREATE TABLE location (
+CREATE TABLE selections (
 id serial PRIMARY KEY,
-selections_id integer UNIQUE NOT NULL REFERENCES selections(id) ON DELETE CASCADE
+trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
 );
 
 CREATE TABLE trips_users (

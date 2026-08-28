@@ -3,6 +3,9 @@ const app = express();
 export default app;
 
 import usersRouter from "#api/users";
+import locationRouter from "#api/locations";
+import tripRouter from "#api/trip";
+import taskRouter from "#api/tasks";
 import chatRouter from "#api/chat";
 import placesRouter from "#api/places_locations";
 import getUserFromToken from "#middleware/getUserFromToken";
@@ -21,7 +24,14 @@ app.use(getUserFromToken);
 
 app.get("/", (req, res) => res.send("Hello, World!"));
 
+//Routes = "path", "file"
+//need to use routes and connect to router (characterRouter).
+//export default so you can name whatever you want
 app.use("/users", usersRouter);
+app.use("/location", locationRouter);
+app.use("/trips", tripRouter);
+app.use("/trips", taskRouter); //:id/tasks follows "/trips"
+app.use("/tasks", taskRouter);
 
 app.use("/trips", chatRouter);
 app.use("/explore", placesRouter);
