@@ -17,7 +17,6 @@ async function seed() {
     RESTART IDENTITY CASCADE;
   `);
 
-
   //await createUser("foo", "bar");
   const hashedPassword1 = await bcrypt.hash("hellodarknessmyoldfriend", 10);
   const hashedPassword2 = await bcrypt.hash("ivecometotalktoyouagain", 10);

@@ -59,12 +59,6 @@ trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
 place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
 );
 
-CREATE TABLE selections (
-id serial PRIMARY KEY,
-trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
-place_id integer NOT NULL REFERENCES place(id) ON DELETE CASCADE
-);
-
 CREATE TABLE trips_users (
 id serial PRIMARY KEY,
 trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
