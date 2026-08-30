@@ -402,4 +402,8 @@ async function seed() {
     `INSERT INTO messages (trip_id, user_id, body) VALUES ($1, $2, $3) RETURNING *;`,
     [1, 3, "landing at 3pm, i'll add it to tasks"],
   );
+    await db.query(
+    `INSERT INTO messages (trip_id, user_id, body, media_url) VALUES ($1, $2, $3, $4) RETURNING *;`,
+    [1, 2, "found this spot for dinner!", "https://picsum.photos/240/160"],
+  );
 }

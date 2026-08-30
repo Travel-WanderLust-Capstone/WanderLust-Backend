@@ -67,9 +67,10 @@ UNIQUE (trip_id, user_id)
 
 
 CREATE TABLE messages (
-  id serial PRIMARY KEY,
-  trip_id integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
-  user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  body text NOT NULL,
+  id         serial PRIMARY KEY,
+  trip_id    integer NOT NULL REFERENCES trips(id) ON DELETE CASCADE,
+  user_id    integer NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  body       text NOT NULL,
+  media_url  text,
   created_at timestamp DEFAULT now()
 );

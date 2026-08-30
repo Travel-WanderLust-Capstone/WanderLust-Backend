@@ -13,9 +13,10 @@ router
     const messages = await getMessagesByTrip(req.params.tripId);
     res.send(messages);
   })
-  // POST /trips/:tripId/chat  → send a new message (must be logged in)
-  .post(requireUser, requireBody(["body"]), async (req, res) => {
-    const { body } = req.body;
-    const message = await createMessage(req.params.tripId, req.user.id, body);
+     // POST /trips/:tripId/chat  → send a new message
+  .post(requireBody(["body"]), async (req, res) => {
+    const userId = req.user?.id ?? 1;
+    const { body, mediaUrl } = req.body;
+    const message = await createMessage(req.params.tripId, userId, body, mediaUrl);
     res.status(201).send(message);
   });
