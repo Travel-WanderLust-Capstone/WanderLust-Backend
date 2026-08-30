@@ -404,6 +404,6 @@ async function seed() {
   );
     await db.query(
     `INSERT INTO messages (trip_id, user_id, body, media_url) VALUES ($1, $2, $3, $4) RETURNING *;`,
-    [1, 2, "found this spot for dinner!", "https://picsum.photos/240/160"],
+    [1, 2, "found this spot for dinner!", "https://storage.googleapis.com/tredita_bucket/wp-content/uploads/85dcdbb8-ewp2024_tredita_chicago-1096.jpg"],
   );
 }
