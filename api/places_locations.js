@@ -9,7 +9,7 @@ import { getLocationById, getLocations } from "#db/queries/locations";
 
 const router = express.Router();
 export default router;
-router.get("/:id/activities/:id", async (req, res) => {
+router.get("/:id/activities/:placeid", async (req, res) => {
   const place = await getPlaceDetails(req.params.placeid);
   if (!place) return res.status(404).send("place not found");
   return res.send(place);
@@ -22,7 +22,7 @@ router.get("/:id/activities", async (req, res) => {
   return res.send(activity);
 });
 
-router.get("/:id/lodging/:id", async (req, res) => {
+router.get("/:id/lodging/:placeid", async (req, res) => {
   const place = await getPlaceDetails(req.params.placeid);
   if (!place) return res.status(404).send("place not found");
   return res.send(place);
