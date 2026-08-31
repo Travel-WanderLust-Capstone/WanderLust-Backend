@@ -4,7 +4,7 @@ export default app;
 
 import usersRouter from "#api/users";
 import locationRouter from "#api/locations";
-import locationsRouter from "#api/location";
+import locationsRouter from "#api/locations";
 import tripRouter from "#api/trip";
 import taskRouter from "#api/tasks";
 import chatRouter from "#api/chat";
