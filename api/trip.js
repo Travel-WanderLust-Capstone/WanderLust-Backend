@@ -2,10 +2,15 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createTrip, getTrips, deleteTrip } from "#db/queries/trip";
+import {
+  createTrip,
+  getTrips,
+  deleteTrip,
+  getTripByIdForUser,
+  getTripsByUserId,
+} from "#db/queries/trip";
 import {
   getTripById,
-  getTripByIdForUser,
   getUsersByTripId,
   addUserToTrip,
 } from "#db/queries/trip_details";
@@ -24,6 +29,13 @@ router.get("/", requireUser, async (request, response) => {
     console.error("Error getting trip", error);
     return response.status(500).send("Server error ");
   }
+});
+
+//GET USERS TRIPS
+router.get("/mine", requireUser, async (req, res) => {
+  const trips = await getTripsByUserId(req.user.id);
+
+  res.send(trips);
 });
 
 //GET /trip:id
@@ -178,7 +190,7 @@ router.post("/:id/users", async (request, response) => {
 
     const newTraveler = await addUserToTrip(tripId, userId, message);
 
-    return response.status(201).send(newTraveler);
+    return response.status(201).json(newTraveler);
   } catch (error) {
     console.error("Error adding traveler", error);
 

@@ -51,3 +51,36 @@ export async function deleteTrip(id) {
   } = await db.query(sql, [id]);
   return trip;
 }
+
+export async function getTripByIdForUser(userId) {
+  const sql = `
+    SELECT trips.*
+    FROM trips
+    JOIN trips_users
+      ON trips.id = trips_users.trip_id
+    WHERE trips.id = $1
+      AND trips_users.user_id = $2;
+  `;
+
+  const {
+    rows: [trip],
+  } = await db.query(sql, [userId]);
+
+  return trip;
+}
+
+// GET all trips assigned to one user
+export async function getTripsByUserId(userId) {
+  const sql = `
+    SELECT trips.*
+    FROM trips
+    JOIN trips_users
+      ON trips.id = trips_users.trip_id
+    WHERE trips_users.user_id = $1
+    ORDER BY trips.start_date;
+  `;
+
+  const { rows } = await db.query(sql, [userId]);
+
+  return rows;
+}
