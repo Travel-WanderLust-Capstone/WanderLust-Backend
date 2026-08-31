@@ -102,4 +102,5 @@ export async function addUserToTrip(tripId, userId, message) {
   const {
     rows: [tripUser],
   } = await db.query(sql, [tripId, userId, message]);
+  return tripUser;
 }

@@ -69,6 +69,23 @@ export async function getTripByIdForUser(userId) {
   return trip;
 }
 
+//Add trip user
+export async function addTripUser(tripId, userId) {
+  const sql = `
+    INSERT INTO trips_users
+      (trip_id, user_id, message)
+    VALUES
+      ($1, $2, $3)
+    RETURNING *;
+  `;
+
+  const {
+    rows: [tripUser],
+  } = await db.query(sql, [tripId, userId, "Trip creator"]);
+
+  return tripUser;
+}
+
 // GET all trips assigned to one user
 export async function getTripsByUserId(userId) {
   const sql = `

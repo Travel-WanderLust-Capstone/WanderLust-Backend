@@ -8,6 +8,7 @@ import {
   deleteTrip,
   getTripByIdForUser,
   getTripsByUserId,
+  addTripUser,
 } from "#db/queries/trip";
 import {
   getTripById,
@@ -174,6 +175,8 @@ router.post("/", requireUser, async (request, response) => {
       description,
     });
 
+    await addTripUser(trip.id, request.user.id);
+
     response.status(201).send(trip); //201 = created
   } catch (error) {
     console.error("Error creating trip", error);
@@ -182,7 +185,7 @@ router.post("/", requireUser, async (request, response) => {
 });
 
 //POST ADD USER To Trip
-router.post("/:id/users", async (request, response) => {
+router.post("/:id/users", requireUser, async (request, response) => {
   try {
     const tripId = request.params.id;
 
