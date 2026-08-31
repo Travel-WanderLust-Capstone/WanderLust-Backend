@@ -11,32 +11,32 @@ const router = express.Router();
 export default router;
 router.get("/:id/activities/:id", async (req, res) => {
   const place = await getPlaceDetails(req.params.placeid);
-  if (place.length === 0) return res.status(404).send("place not found");
+  if (!place) return res.status(404).send("place not found");
   return res.send(place);
 });
 
 router.get("/:id/activities", async (req, res) => {
   const activity = await getActivitiesByLocation(req.params.id);
-  if (activity.length === 0)
+  if (!activity)
     return res.status(404).send("activities not found");
   return res.send(activity);
 });
 
 router.get("/:id/lodging/:id", async (req, res) => {
   const place = await getPlaceDetails(req.params.placeid);
-  if (place.length === 0) return res.status(404).send("place not found");
+  if (!place) return res.status(404).send("place not found");
   return res.send(place);
 });
 
 router.get("/:id/lodging", async (req, res) => {
   const lodging = await getLodgingByLocation(req.params.id);
-  if (lodging.length === 0) return res.status(404).send("lodging not found");
+  if (!lodging) return res.status(404).send("lodging not found");
   return res.send(lodging);
 });
 
 router.get("/:id/:placeid", async (req, res) => {
   const place = await getPlaceDetails(req.params.placeid);
-  if (place.length === 0) return res.status(404).send("place not found");
+  if (!place) return res.status(404).send("place not found");
   return res.send(place);
 });
 
