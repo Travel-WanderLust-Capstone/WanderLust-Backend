@@ -42,7 +42,7 @@ router.get("/:id/:placeid", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const location = await getLocationById(req.params.id);
-  if (location.length === 0) return res.status(404).send("location Not Found");
+  if (!location) return res.status(404).send("location Not Found");
   const places = await getPlacesByLocation(req.params.id);
   if (places.length === 0) return res.status(404).send("places not found");
   return res.send({ location, places });
